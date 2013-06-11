@@ -3,10 +3,11 @@
 #include "pebble_fonts.h"
 
 
-#define MY_UUID { 0xE0, 0x05, 0xF6, 0x79, 0x5E, 0x7B, 0x48, 0x37, 0xB4, 0xD9, 0x66, 0x16, 0xBA, 0x3F, 0x9D, 0x2C }
+#define APP_NAME "choon"
+#define MY_UUID { 0x5A, 0xE7, 0x98, 0x6D, 0x7D, 0x07, 0x4D, 0xCA, 0x85, 0x16, 0x5D, 0xC3, 0xD5, 0x00, 0x5A, 0x77 }
 PBL_APP_INFO(MY_UUID,
-             "Template App", "Your Company",
-             1, 0, /* App version */
+             APP_NAME, "richo@psych0tik.net",
+             0, 0, /* App version */
              DEFAULT_MENU_ICON,
              APP_INFO_STANDARD_APP);
 
@@ -16,7 +17,7 @@ Window window;
 void handle_init(AppContextRef ctx) {
   (void)ctx;
 
-  window_init(&window, "Window Name");
+  window_init(&window, APP_NAME);
   window_stack_push(&window, true /* Animated */);
 }
 
