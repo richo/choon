@@ -13,12 +13,23 @@ PBL_APP_INFO(MY_UUID,
 
 Window window;
 
+void select_single_click_handler(ClickRecognizerRef recognizer, Window *window) {
+
+    vibes_short_pulse();
+}
+
+void click_config_provider(ClickConfig **config, Window *window) {
+    config[BUTTON_ID_SELECT]->click.handler = (ClickHandler) select_single_click_handler;
+    config[BUTTON_ID_SELECT]->click.repeat_interval_ms = 100;
+}
 
 void handle_init(AppContextRef ctx) {
   (void)ctx;
 
   window_init(&window, APP_NAME);
   window_stack_push(&window, true /* Animated */);
+
+  window_set_click_config_provider(&window, (ClickConfigProvider) click_config_provider);
 }
 
 
