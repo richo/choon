@@ -1,0 +1,3 @@
+[submodule "src/httppebble-watch"]
+	path = src/httppebble-watch
+	url = git://github.com/Katharine/httpebble-watch.git
