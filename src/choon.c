@@ -13,32 +13,28 @@ PBL_APP_INFO(HTTP_UUID,
              APP_INFO_STANDARD_APP);
 
 Window window;
+TextLayer text;
+DictionaryIterator *body;
 
 void select_single_click_handler(ClickRecognizerRef recognizer, Window *window) {
-    /* vibes_short_pulse(); */
+    vibes_short_pulse();
 }
 
 void fire_track_request(char req) {
     static int ret;
     static char *url = "http://192.168.43.32/XXXXXXXXXXXX/_";
     /*                    XXX use choon.io */
-    static DictionaryIterator **body;
 
-    /* url[strlen(url) - 1] = req; */
-    if ((ret = http_out_get(url, 123123123, body)) == HTTP_OK) {
+    url[strlen(url) - 1] = req;
+    if ((ret = http_out_get(url, 293847856, &body)) == HTTP_OK) {
         http_out_send();
     } else {
-        switch(ret) {
-            case HTTP_BUSY:
-                vibes_short_pulse();
-            case HTTP_INVALID_ARGS:
-                vibes_short_pulse();
-            case HTTP_NOT_ENOUGH_STORAGE:
-                vibes_short_pulse();
-            case HTTP_INTERNAL_INCONSISTENCY:
-                vibes_short_pulse();
-        }
+        vibes_short_pulse();
     }
+}
+
+void prev_track(ClickRecognizerRef recognizer, Window *window) {
+    fire_track_request('p');
 }
 
 void next_track(ClickRecognizerRef recognizer, Window *window) {
@@ -49,8 +45,8 @@ void click_config_provider(ClickConfig **config, Window *window) {
     config[BUTTON_ID_SELECT]->click.handler = (ClickHandler) select_single_click_handler;
     config[BUTTON_ID_SELECT]->click.repeat_interval_ms = 100;
 
-    /* config[BUTTON_ID_UP]->click.handler = (ClickHandler) select_single_click_handler; */
-    /* config[BUTTON_ID_UP]->click.repeat_interval_ms = 100; */
+    config[BUTTON_ID_UP]->click.handler = (ClickHandler) prev_track;;
+    config[BUTTON_ID_UP]->click.repeat_interval_ms = 100;
 
     config[BUTTON_ID_DOWN]->click.handler = (ClickHandler) next_track;
     config[BUTTON_ID_DOWN]->click.repeat_interval_ms = 100;
