@@ -72,7 +72,13 @@ void handle_init(AppContextRef ctx) {
 
 void pbl_main(void *params) {
   PebbleAppHandlers handlers = {
-    .init_handler = &handle_init
+    .init_handler = &handle_init,
+    .messaging_info = {
+        .buffer_sizes = {
+            .inbound = 124,
+            .outbound = 124,
+        }
+    }
   };
   app_event_loop(params, &handlers);
 }
