@@ -22,7 +22,7 @@ void select_single_click_handler(ClickRecognizerRef recognizer, Window *window) 
 
 void fire_track_request(char req) {
     static int ret;
-    static char *url = "http://192.168.43.32:4949/XXXXXXXXXXXX/_";
+    static char *url = "http://app.choon.io:4949/XXXXXXXXXXXX/_";
     /*                    XXX use choon.io */
 
     url[strlen(url) - 1] = req;
