@@ -23,9 +23,9 @@ void fire_track_request(char req) {
 
     url[strlen(url) - 1] = req;
     if ((ret = http_out_get(url, 293847856, &body)) == HTTP_OK) {
-        http_out_send();
-    } else {
-        vibes_short_pulse();
+        if (http_out_send() == HTTP_OK) {
+            vibes_short_pulse();
+        }
     }
 }
 
