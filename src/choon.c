@@ -16,10 +16,6 @@ Window window;
 TextLayer text;
 DictionaryIterator *body;
 
-void select_single_click_handler(ClickRecognizerRef recognizer, Window *window) {
-    vibes_short_pulse();
-}
-
 void fire_track_request(char req) {
     static int ret;
     static char *url = "http://app.choon.io:4949/XXXXXXXXXXXX/_";
@@ -41,11 +37,15 @@ void next_track(ClickRecognizerRef recognizer, Window *window) {
     fire_track_request('n');
 }
 
+void toggle_play(ClickRecognizerRef recognizer, Window *window) {
+    fire_track_request('t');
+}
+
 void click_config_provider(ClickConfig **config, Window *window) {
-    config[BUTTON_ID_SELECT]->click.handler = (ClickHandler) select_single_click_handler;
+    config[BUTTON_ID_SELECT]->click.handler = (ClickHandler) toggle_play;
     config[BUTTON_ID_SELECT]->click.repeat_interval_ms = 100;
 
-    config[BUTTON_ID_UP]->click.handler = (ClickHandler) prev_track;;
+    config[BUTTON_ID_UP]->click.handler = (ClickHandler) prev_track;
     config[BUTTON_ID_UP]->click.repeat_interval_ms = 100;
 
     config[BUTTON_ID_DOWN]->click.handler = (ClickHandler) next_track;
