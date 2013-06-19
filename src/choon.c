@@ -19,7 +19,6 @@ DictionaryIterator *body;
 void fire_track_request(char req) {
     static int ret;
     static char *url = "http://app.choon.io:4949/XXXXXXXXXXXX/_";
-    /*                    XXX use choon.io */
 
     url[strlen(url) - 1] = req;
     if ((ret = http_out_get(url, 293847856, &body)) == HTTP_OK) {
